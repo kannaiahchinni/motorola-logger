@@ -1,0 +1,16 @@
+{
+  "coverImage": "https://i.pinimg.com/originals/97/cc/29/97cc29a6e5119a86170ba848342a7683.jpg",
+  "coverButtonName" : "Logs",
+  "logoImagePath": "https://www.motorolasolutions.com/content/dam/msi/assets/msisolutions2.png",
+  "coverText" : "Welcome to Motorola Solutions",
+  "searchButton": "Search Logs",
+  "filters": {
+    "environment" : [
+      { "label": "Dev", "value":"dev", "nodes":["node1", "node2"]},
+      { "label": "UAT", "value":"uat" ,"nodes":["node3", "node4"]},
+      { "label": "PROD", "value":"prod" ,"nodes":["node5", "node4"]}
+    ],
+    "nodes":[],
+    "orderBy":["Date", "Name"]
+  }
+}

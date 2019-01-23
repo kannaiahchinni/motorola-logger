@@ -1,1 +1,248 @@
 /* You can add global styles to this file, and also import other style files */
+$shadow : 0 3px 11px 0 rgba(224, 217, 217, 0.78)
+$white: #fff
+
+
+.shadow-class
+  box-shadow: $shadow
+
+body, html
+  background: #efefef
+
+.cover
+  position: absolute
+  top: 65px
+  bottom: 0
+  width: 100%
+  //background: url("https://i.pinimg.com/originals/97/cc/29/97cc29a6e5119a86170ba848342a7683.jpg") no-repeat
+  -webkit-background-size: cover
+  background-size: cover
+  min-height: 100%
+  height: auto
+
+.cover-text
+  display: flex
+  text-align: center
+  vertical-align: middle
+  flex-direction: column
+
+.spacer
+  flex: 1 1 auto
+
+.go-button
+  width: 130px
+  text-align: center
+
+.heading
+  display: flex
+  margin-top: 22%
+  justify-content: space-around
+  color: #fff
+
+
+.flex-container
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+  top: 68px
+  .filters
+    width: 22%
+    background: #fff
+
+  .results
+    width: 76%
+    background: #fff
+.filters
+  .mat-form-field
+    width: 100%
+    border: 1px solid #dadce0
+    border-radius: 5px
+    :focus
+      border: 1px solid blue
+
+  .mat-form-field-infix:focus
+    border: 1px solid blue
+  .mat-form-field-underline
+    display: none !important
+    height: 0 !important
+    background-color: inherit !important
+
+.filters
+  .mat-form-field-should-float
+    .mat-form-field-label
+      display: inline-flex
+      background: #fff
+      min-width: 100px
+      text-align: left
+      left: .5em
+      padding-left: 15px
+    .mat-form-field-label-wrapper
+      top: -1.2em
+      width: auto
+      min-width: 100px
+
+  .mat-select-value
+    padding-left: 1em
+
+  .mat-select-panel
+    min-width: 100% !important
+    margin-left: 1em
+
+.table-header
+  background-color: #95A5A6
+  font-size: 14px
+  text-transform: uppercase
+  letter-spacing: 0.03em
+  th
+    flex-basis: 10%
+
+.mat-paginator
+  background: #eceaea
+
+
+.header, table.mat-table
+  margin: 10px
+
+@media only screen and (max-width: 900px)
+  .moto-icon
+    width: 100%
+  .flex-container
+    flex-direction: column
+    justify-content: unset
+    .filters
+      width: 100%
+      display: inline-flex
+      flex-direction: column
+      flex-wrap: wrap
+    .results
+      display: block
+      width: 100%
+      margin-top: 10px
+    .form-field
+      display: inline-flex
+      justify-content: space-between
+
+.km-overlay
+  display: block
+  position: fixed
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  z-index: 100000
+  background-color: rgba(0,0,0,.5)
+
+.km-modal
+  box-shadow: 0 3px 11px 0 #9E9E9E
+  height: 100px
+  padding: 20px
+  background: #FFF
+  border-radius: 10px
+  width: 200px
+
+.km-loader
+  border: 10px solid #646464
+  border-top: 10px solid #81B5A1
+  border-bottom: 10px solid #81B5A1
+  border-radius: 50%
+  width: 50px
+  height: 50px
+  animation: spin 1s linear infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(360deg)
+
+.km-vertical
+  left: 0
+  bottom: 0
+  top: 0
+  right: 0
+  margin: auto
+  position: absolute
+
+.km-loading-text
+  padding: 10px
+  font-size: 18px
+
+.km-modal-content
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  margin-top: 5%
+  vertical-align: middle
+  align-items: center
+
+
+.km-loader
+  width: 100px
+  height: 100px
+  border-radius: 50%
+  border: 3px solid transparent
+  border-top-color: #81B5A1
+  -webkit-animation: spin 2s linear infinite
+  animation: spin 2s linear infinite
+
+
+.km-loader:before
+  content: ""
+  position: absolute
+  top: 5px
+  left: 5px
+  right: 5px
+  bottom: 5px
+  border-radius: 50%
+  border: 3px solid transparent
+  border-top-color: #fff
+  -webkit-animation: spin 3s linear infinite
+  animation: spin 3s linear infinite
+
+
+.km-loader:after
+  content: ""
+  position: absolute
+  top: 15px
+  left: 15px
+  right: 15px
+  bottom: 15px
+  border-radius: 50%
+  border: 3px solid transparent
+  border-top-color: #000
+  -webkit-animation: spin 1.5s linear infinite
+  animation: spin 1.5s linear infinite
+
+
+@-webkit-keyframes spin
+  0%
+    -webkit-transform: rotate(0deg)
+    -ms-transform: rotate(0deg)
+    transform: rotate(0deg)
+  100%
+    -webkit-transform: rotate(360deg)
+    -ms-transform: rotate(360deg)
+    transform: rotate(360deg)
+
+@keyframes spin
+  0%
+    -webkit-transform: rotate(0deg)
+    -ms-transform: rotate(0deg)
+    transform: rotate(0deg)
+  100%
+    -webkit-transform: rotate(360deg)
+    -ms-transform: rotate(360deg)
+    transform: rotate(360deg)
+
+
+
+/* override css */
+.km-modal
+  background: none !important
+  box-shadow: none !important
+  padding: 0 0 0 3em
+
+
+.km-loading-text
+  display: none
+

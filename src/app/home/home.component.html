@@ -1,0 +1,9 @@
+
+<div class="cover cover-text" *ngIf="config" [ngStyle]="{'background-image':'url('+ config.coverImage}">
+  <div class="heading">
+    <h2> {{ config.coverText }}  </h2>
+  </div>
+  <div class="start-button">
+    <button mat-raised-button class="go-button" routerLink="/log">  {{ config.coverButtonName}}</button>
+  </div>
+</div>
