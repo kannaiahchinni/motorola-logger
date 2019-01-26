@@ -25,7 +25,7 @@
     </div>
     <div class="form-field ">
     <mat-form-field>
-      <mat-select placeholder="Order" [formControl]="orderFormControl" required>
+      <mat-select placeholder="Order" [formControl]="orderFormControl">
         <mat-option *ngFor="let order of config.filters.orderBy" [value]="order">
           {{order}}
         </mat-option>
@@ -39,21 +39,28 @@
   </div>
 
   <div class="results">
-    <div class="header">
+    <div class="header" *ngIf="result.fileList.length > 0">
+      <!--<input matInput type="text" placeholder="Search File Names" [(ngModel)]="fileName"> -->
       <mat-paginator [length]="length"
                      [pageSize]="pageSize"
                      (page)="pageEvent =getServerData($event)">
       </mat-paginator>
     </div>
 
-    <table mat-table [dataSource]="sortedData" class="mat-elevation-z8">
+
+
+     <div>
+       <p *ngFor="let file of result.fileList"> <a (click)="openFile(file)" >{{ file }} </a> </p>
+     </div>
+
+    <!-- <table mat-table [dataSource]="sortedData" class="mat-elevation-z8">
 
       <ng-container matColumnDef="fileName">
         <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
       </ng-container>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    </table>
+    </table> -->
 
   </div>
 

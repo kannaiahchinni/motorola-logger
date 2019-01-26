@@ -61,32 +61,24 @@ export class ConfigService {
   removeLoader() {
     const elem = document.getElementById('km-over-lay');
     document.body.removeChild(elem);
-  };
+  }
 
   checkNotificationContainer(id) {
     const ele = document.getElementById(id);
     return ele;
   }
 
-  /*showMessage(message, id) {
-    const messageHtml = `<div class="snackbar"> <div class="icon">
-          <i class="fa fa-check shadow" aria-hidden="true"></i></div>  <div class="info">\n` + message + `</div></div>`;
-    var nodeEle = document.createElement('div');
-    id = "snack-over-lay-"+id;
-    console.log(id);
-    nodeEle.setAttribute("id",id);
-    nodeEle.innerHTML = messageHtml;
-    //document.body.appendChild(nodeEle);
-    sanckBarDom.appendChild(nodeEle);
+  /*
+    Calling rest api to pull the list.
+   */
+  getFileNames(env, node) {
+    let url = this.config.baseUrl + this.config.restApi + '?env=' + env + '&node=' + node;
+    if (!this.config.live) {
+      url = '/assets/dummy.json';
+    }
+    return this.http.get(url);
+  }
 
-    setTimeout(function(id) {
-      return function() {
-        var elem = document.getElementById(id);
-        //document.body.removeChild(elem);
-        sanckBarDom.removeChild(elem);
-      };
-    }(id),6000);
-  }; */
 
 
 }

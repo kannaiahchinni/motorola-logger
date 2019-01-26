@@ -6,11 +6,16 @@
   "searchButton": "Search Logs",
   "filters": {
     "environment" : [
-      { "label": "Dev", "value":"dev", "nodes":["node1", "node2"]},
+      { "label": "Dev", "value":"dev", "nodes":["auselalixmulesoft03_logs", "auselmulap03_logs"]},
       { "label": "UAT", "value":"uat" ,"nodes":["node3", "node4"]},
       { "label": "PROD", "value":"prod" ,"nodes":["node5", "node4"]}
     ],
     "nodes":[],
     "orderBy":["Date", "Name"]
-  }
+  },
+  "baseUrl":"https://api-dev.motorolasolutions.com/ecom/v1.0/logs1/",
+  "restApi":"readLogFileNames",
+  "fileApi":"readLogFile",
+  "live":true
+
 }

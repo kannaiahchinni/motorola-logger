@@ -27,15 +27,22 @@ export class LogComponent implements OnInit {
   ]
   displayedColumns: string[] = ['fileName'];
   length: any;
-  pageSize: any = 10;
+  pageSize: any = 30;
   sortedData: LogFile[];
   pageEvent: PageEvent;
+  result: any = {};
+  dummy: any = {};
+  env: any;
+  node: any;
+  fileName: any;
 
   constructor(public configService: ConfigService) {
      for ( let i = 0 ; i < 20; i++ ) {
          this.logData.push({ url: 'https://url' + i + '.com', fileName: 'xyz' + i });
      }
-
+     Object.assign(this.result, {
+       fileList: []
+     });
   }
 
   ngOnInit() {
@@ -60,14 +67,16 @@ export class LogComponent implements OnInit {
       console.log(event);
       const start = event.pageIndex * event.pageSize;
       const end = start + event.pageSize;
-    this.sortedData = this.logData.slice(start, end);
+      console.log(this.dummy.fileList);
+      this.result.fileList  = this.dummy.fileList.slice(start, end);
+      console.log(this.result.fileList);
   }
 
   prepareFilters() {
 
     this.envFormControl = new FormControl('', [Validators.required]);
     this.nodeFormControl = new FormControl('', [Validators.required]);
-    this.orderFormControl = new FormControl('', [Validators.required]);
+    this.orderFormControl = new FormControl('');
     this.nodes = this.config.filters.environment[0].nodes;
 
   }
@@ -78,10 +87,19 @@ export class LogComponent implements OnInit {
 
   search() {
     this.configService.showLoader(' Loading.. Please wait ');
-
-    setTimeout(() => {
+    this.env = this.envFormControl.value.value;
+    this.node = this.nodeFormControl.value;
+    this.configService.getFileNames(this.envFormControl.value.value, this.nodeFormControl.value).subscribe( data => {
+      this.dummy = data;
+      this.result.fileList = this.dummy.fileList.slice(0, this.pageSize);
+      this.length = this.dummy.fileList.length;
       this.configService.removeLoader();
-    }, 3000);
+    });
+  }
+
+  openFile(fileName) {
+    const url = this.config.baseUrl + this.config.fileApi + '?filename=' + fileName + '&env=' + this.env + '&node=' + this.node;
+    window.open(url, '_blank');
   }
 
 }

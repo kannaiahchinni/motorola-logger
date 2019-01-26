@@ -357,16 +357,14 @@ MIT
 
 @angular/material/core
 
-@angular/material/table
+@angular/material/tooltip
+
+@angular/material/form-field
 
 @angular/forms
 MIT
 
-@angular/material/form-field
-
 @angular/material/select
-
-@angular/material/tooltip
 
 @angular/material/paginator
 
