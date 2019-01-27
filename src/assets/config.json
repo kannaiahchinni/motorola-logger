@@ -16,6 +16,6 @@
   "baseUrl":"https://api-dev.motorolasolutions.com/ecom/v1.0/logs1/",
   "restApi":"readLogFileNames",
   "fileApi":"readLogFile",
-  "live":true
+  "live":false
 
 }
