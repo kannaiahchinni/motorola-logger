@@ -67,7 +67,7 @@
     <form>
     <div class="form-field ">
       <mat-form-field>
-        <mat-select placeholder="Environments" [formControl]="envFormControl"  (change)="SelectEnv($event)" required>
+        <mat-select placeholder="Environments" [formControl]="envFormControl"  (selectionChange)="SelectEnv($event)" required>
           <mat-option *ngFor="let env of config.filters.environment" [value]="env">
             {{env.label}}
           </mat-option>

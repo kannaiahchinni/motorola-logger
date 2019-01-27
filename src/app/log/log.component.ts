@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service';
 import {FormControl, Validators} from '@angular/forms';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatSnackBar } from '@angular/material';
 
 export interface LogFile {
   fileName: string;
@@ -37,7 +37,7 @@ export class LogComponent implements OnInit {
   fileName: any;
   searchText: any;
 
-  constructor(public configService: ConfigService) {
+  constructor(public configService: ConfigService, public snackBar: MatSnackBar) {
      for ( let i = 0 ; i < 20; i++ ) {
          this.logData.push({ url: 'https://url' + i + '.com', fileName: 'xyz' + i });
      }
@@ -78,12 +78,19 @@ export class LogComponent implements OnInit {
 
   SelectEnv(event) {
      this.nodes = this.envFormControl.value.nodes;
+     this.nodeFormControl.value = '';
   }
 
   search() {
-    this.configService.showLoader(' Loading.. Please wait ');
     this.env = this.envFormControl.value.value;
     this.node = this.nodeFormControl.value;
+    if ( !this.env || !this.node ) {
+      this.snackBar.open('Please select Environment/Node', '', {
+        duration: 2000,
+      });
+      return;
+    }
+    this.configService.showLoader(' Loading.. Please wait ');
     this.configService.getFileNames(this.envFormControl.value.value, this.nodeFormControl.value).subscribe( data => {
       this.dummy = data;
       this.dummy.fileList = this.configService.sortData(this.dummy.fileList);
