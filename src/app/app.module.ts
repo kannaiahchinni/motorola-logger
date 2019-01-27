@@ -11,12 +11,15 @@ import { ConfigService } from './config.service';
 import { HomeComponent } from './home/home.component';
 import { LogComponent } from './log/log.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { KfilterPipe } from './kfilter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LogComponent
+    LogComponent,
+    KfilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
+import {_} from 'underscore';
 
 @Injectable()
 export class ConfigService {
@@ -30,6 +30,10 @@ export class ConfigService {
   }
   getConfigData() {
     return this.config;
+  }
+
+  sortData(data) {
+    return _.sortBy(data);
   }
 
 

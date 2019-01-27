@@ -1,3 +1,7 @@
+$total-items: 100
+$primary-color: #293e40
+$white-color: #fff
+
 .mat-form-field-underline
     display: none !important
     height: 0 !important
@@ -13,3 +17,81 @@ p
   cursor: pointer
   a:hover
     color: blue
+
+.result-div
+  height: auto
+
+.example-container
+  position: fixed
+  top: 70px
+  bottom: 2px
+  left: 5px
+  right: 0
+  background: #eee
+
+.header
+  background: $white-color
+  margin: 0 10px 2px
+  padding: 5px
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+
+.mat-paginator
+  background: $white-color !important
+
+ul
+  position: absolute
+  width: 98%
+  margin: 0
+  padding: 10px
+
+li
+  position: relative
+  display: block
+  margin-bottom: 5px
+  padding: 10px
+  text-align: left
+  animation: fadeIn 0.5s linear
+  animation-fill-mode: both
+  background: $white-color
+  color: $primary-color
+  cursor: pointer
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  &:hover
+    background: $primary-color
+    color: $white-color
+
+
+.mat-raised-button
+  background-color: $primary-color !important
+  width: 100%
+  color: $white-color !important
+
+.search-text
+  margin-left: 30px !important
+
+.no-result-content
+  position: relative
+  margin: 10% auto
+  width: 300px
+
+// Set delay per List Item
+@for $i from 1 through $total-items
+  li:nth-child(#{$i})
+    animation-delay: .05s * $i
+
+
+
+// Keyframe animation
+@-webkit-keyframes fadeIn
+  0%
+    opacity: 0
+    top: 100px
+  75%
+    opacity: 0.5
+    top: 0px
+  100%
+    opacity: 1

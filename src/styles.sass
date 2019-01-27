@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 $shadow : 0 3px 11px 0 rgba(224, 217, 217, 0.78)
 $white: #fff
-
+$primary-color: #293e40
 
 .shadow-class
   box-shadow: $shadow
@@ -51,9 +51,13 @@ body, html
   .results
     width: 76%
     background: #fff
+
+.mat-form-field
+  width: 100%
+
 .filters
+  width: 22%
   .mat-form-field
-    width: 100%
     border: 1px solid #dadce0
     border-radius: 5px
     :focus
@@ -101,6 +105,8 @@ body, html
 
 .header, table.mat-table
   margin: 10px
+  .mat-form-field-flex
+    margin-top: 10px !important
 
 @media only screen and (max-width: 900px)
   .moto-icon
@@ -245,3 +251,5 @@ body, html
 .km-loading-text
   display: none
 
+button
+  color: $primary-color !important

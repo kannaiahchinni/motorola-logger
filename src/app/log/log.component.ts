@@ -27,14 +27,15 @@ export class LogComponent implements OnInit {
   ]
   displayedColumns: string[] = ['fileName'];
   length: any;
-  pageSize: any = 30;
+  pageSize: any = 50;
   sortedData: LogFile[];
-  pageEvent: PageEvent;
+  pageEvent: any;
   result: any = {};
   dummy: any = {};
   env: any;
   node: any;
   fileName: any;
+  searchText: any;
 
   constructor(public configService: ConfigService) {
      for ( let i = 0 ; i < 20; i++ ) {
@@ -43,6 +44,9 @@ export class LogComponent implements OnInit {
      Object.assign(this.result, {
        fileList: []
      });
+    Object.assign(this.dummy, {
+      fileList: []
+    });
   }
 
   ngOnInit() {
@@ -56,32 +60,23 @@ export class LogComponent implements OnInit {
       this.prepareFilters();
     });
 
-    this.length =  this.logData.length;
-    console.log(this.pageSize);
-    this.sortedData = this.logData.slice(1, this.pageSize);
-    console.log(this.sortedData.length);
-
   }
 
   getServerData(event?: PageEvent) {
-      console.log(event);
       const start = event.pageIndex * event.pageSize;
       const end = start + event.pageSize;
-      console.log(this.dummy.fileList);
       this.result.fileList  = this.dummy.fileList.slice(start, end);
-      console.log(this.result.fileList);
   }
 
   prepareFilters() {
-
-    this.envFormControl = new FormControl('', [Validators.required]);
-    this.nodeFormControl = new FormControl('', [Validators.required]);
-    this.orderFormControl = new FormControl('');
     this.nodes = this.config.filters.environment[0].nodes;
+    this.envFormControl = new FormControl(this.config.filters.environment[0], [Validators.required]);
+    this.nodeFormControl = new FormControl(this.nodes[0], [Validators.required]);
+    this.orderFormControl = new FormControl({value: 'Name', disabled: true});
 
   }
 
-  SelectEnv() {
+  SelectEnv(event) {
      this.nodes = this.envFormControl.value.nodes;
   }
 
@@ -91,6 +86,7 @@ export class LogComponent implements OnInit {
     this.node = this.nodeFormControl.value;
     this.configService.getFileNames(this.envFormControl.value.value, this.nodeFormControl.value).subscribe( data => {
       this.dummy = data;
+      this.dummy.fileList = this.configService.sortData(this.dummy.fileList);
       this.result.fileList = this.dummy.fileList.slice(0, this.pageSize);
       this.length = this.dummy.fileList.length;
       this.configService.removeLoader();
@@ -100,6 +96,19 @@ export class LogComponent implements OnInit {
   openFile(fileName) {
     const url = this.config.baseUrl + this.config.fileApi + '?filename=' + fileName + '&env=' + this.env + '&node=' + this.node;
     window.open(url, '_blank');
+  }
+  filterRecords(event) {
+    if (event.target.value && event.target.value !== '') {
+      const list = this.dummy.fileList.filter(function (item) {
+        return item.toLowerCase().indexOf(event.target.value) > -1;
+      });
+      this.length = list.length;
+      this.result.fileList  = list.slice(0, this.pageSize);
+    } else {
+      this.length = this.dummy.fileList.length;
+      this.result.fileList  = this.dummy.fileList.slice(0, this.pageSize);
+    }
+
   }
 
 }
