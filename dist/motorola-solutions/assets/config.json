@@ -1,9 +1,9 @@
 {
   "coverImage": "https://i.pinimg.com/originals/97/cc/29/97cc29a6e5119a86170ba848342a7683.jpg",
-  "coverButtonName" : "Logs",
+  "coverButtonName" : "Go",
   "logoImagePath": "https://www.motorolasolutions.com/content/dam/msi/assets/msisolutions2.png",
   "coverText" : "Welcome to Motorola Solutions",
-  "searchButton": "Search Logs",
+  "searchButton": "SEARCH",
   "filters": {
     "environment" : [
       { "label": "Dev", "value":"dev", "nodes":["auselalixmulesoft03_logs", "auselmulap03_logs"]},
@@ -16,6 +16,6 @@
   "baseUrl":"https://api-dev.motorolasolutions.com/ecom/v1.0/logs1/",
   "restApi":"readLogFileNames",
   "fileApi":"readLogFile",
-  "live":false
+  "live":true
 
 }

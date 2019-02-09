@@ -75,8 +75,8 @@ export class ConfigService {
   /*
     Calling rest api to pull the list.
    */
-  getFileNames(env, node) {
-    let url = this.config.baseUrl + this.config.restApi + '?env=' + env + '&node=' + node;
+  getFileNames(env, node, searchString) {
+    let url = this.config.baseUrl + this.config.restApi + '?env=' + env + '&node=' + node + '&fileContains=' + searchString;
     if (!this.config.live) {
       url = '/assets/dummy.json';
     }
