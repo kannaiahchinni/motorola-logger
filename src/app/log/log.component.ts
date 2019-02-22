@@ -94,8 +94,8 @@ export class LogComponent implements OnInit {
     }
     this.configService.showLoader(' Loading.. Please wait ');
     this.configService.getFileNames(this.envFormControl.value.value, this.nodeFormControl.value, this.searchString||'').subscribe( data => {
-      this.dummy = data;
-      this.dummy.fileList = this.configService.sortData(this.dummy.fileList);
+      this.dummy = data['fileList'] || data;
+      this.dummy.fileList = this.configService.sortData(this.dummy);
       this.result.fileList = this.dummy.fileList.slice(0, this.pageSize);
       this.length = this.dummy.fileList.length;
       this.configService.removeLoader();
