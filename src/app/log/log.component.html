@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="'false'">
+<mat-drawer-container class="example-container" [hasBackdrop]="'false'" *ngIf="config">
   <mat-drawer #drawer [mode]="'side'" class="filters" opened>
     <form>
     <div class="form-field ">
@@ -13,7 +13,7 @@
     </div>
       <div class="form-field ">
         <mat-form-field>
-          <mat-select placeholder="Nodes" [formControl]="nodeFormControl" name="nodes" required>
+          <mat-select placeholder="Nodes" [formControl]="nodeFormControl" name="nodes" (selectionChange)="SelectNode($event)" required>
             <mat-option *ngFor="let node of nodes" [value]="node">
               {{node}}
             </mat-option>
@@ -23,7 +23,7 @@
       </div>
       <div class="form-field ">
         <mat-form-field>
-          <mat-select placeholder="Order" [formControl]="orderFormControl"  name="order">
+          <mat-select placeholder="Applications" [formControl]="orderFormControl"  name="order">
             <mat-option *ngFor="let order of config.filters.orderBy" [value]="order">
               {{order}}
             </mat-option>
@@ -43,7 +43,7 @@
   </mat-drawer>
   <mat-drawer-content >
     <div class="header shadow-class">
-    <mat-grid-list cols="4" rowHeight="10:2">
+    <mat-grid-list cols="5" rowHeight="10:2">
       <!--  <mat-grid-tile colspan="1">
      <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
       </mat-grid-tile>-->
@@ -61,11 +61,29 @@
                        (page)="pageEvent = getServerData($event)">
         </mat-paginator>
       </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+          <mat-slide-toggle
+            [color]="'accent'"
+            [(ngModel)]="grid"
+          > Grid </mat-slide-toggle>
+      </mat-grid-tile>
     </mat-grid-list>
     </div>
 
     <div class="result-div">
-      <ul id="list" class="swing">
+      <div class="result-div1" *ngIf="grid">
+      <div class="item" *ngFor="let file of result.fileList" (click)="openFile(file)" >
+        <div class="header">
+            <i class="material-icons">
+                description
+            </i>
+        </div>
+        <div class="body">
+            {{ file }}
+        </div>
+      </div>
+    </div>
+     <ul id="list" class="swing" *ngIf="!grid">
         <li class="show shadow-class" *ngFor="let file of result.fileList" (click)="openFile(file)">{{ file }}</li>
       </ul>
 

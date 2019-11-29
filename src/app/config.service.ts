@@ -9,8 +9,14 @@ export class ConfigService {
   snackBarDom: any;
   @Output() update: EventEmitter<any> = new EventEmitter();
 
+
   constructor(public http: HttpClient) {
     this.addsnackDOM();
+  }
+
+  getApplicationNames(env: string, node: string) {
+    const url = this.config.baseUrl + this.config.appliationApi + '?env=' + env + '&node=' + node;
+    return this.http.get(url);
   }
 
   emitConfigUpdate() {
@@ -75,8 +81,13 @@ export class ConfigService {
   /*
     Calling rest api to pull the list.
    */
-  getFileNames(env, node, searchString) {
-    let url = this.config.baseUrl + this.config.restApi + '?env=' + env + '&node=' + node + '&fileContains=' + searchString;
+  getFileNames(env, node, order, searchString) {
+    debugger;
+    const finalUrl = order ?  this.config.applicationLogApi : this.config.restApi;
+    let url = this.config.baseUrl + finalUrl + '?env=' + env + '&node=' + node + '&fileContains=' + searchString;
+    if (order) {
+      url = url + '&appNameContains=' + order;
+    }
     if (!this.config.live) {
       url = '/assets/dummy.json';
     }

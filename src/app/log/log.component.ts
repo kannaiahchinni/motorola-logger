@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {ConfigService} from '../config.service';
 import {FormControl, Validators} from '@angular/forms';
 import { PageEvent, MatSnackBar } from '@angular/material';
@@ -37,6 +37,7 @@ export class LogComponent implements OnInit {
   fileName: any;
   searchText: any;
   searchString: any;
+  loading = false;
 
   constructor(public configService: ConfigService, public snackBar: MatSnackBar) {
      for ( let i = 0 ; i < 20; i++ ) {
@@ -59,6 +60,9 @@ export class LogComponent implements OnInit {
     this.subscription = this.configService.updateEmitConfigUpdate().subscribe(config => {
       this.config = this.configService.getConfigData();
       this.prepareFilters();
+      if (this.config.applicationName) {
+        this.getApplicationNames();
+      }
     });
 
   }
@@ -73,7 +77,8 @@ export class LogComponent implements OnInit {
     this.nodes = this.config.filters.environment[0].nodes;
     this.envFormControl = new FormControl(this.config.filters.environment[0], [Validators.required]);
     this.nodeFormControl = new FormControl(this.nodes[0], [Validators.required]);
-    this.orderFormControl = new FormControl({value: 'Name', disabled: true});
+    this.orderFormControl = new FormControl();
+    this.getApplicationNames();
 
   }
 
@@ -82,10 +87,16 @@ export class LogComponent implements OnInit {
      this.nodeFormControl.value = '';
   }
 
+  SelectNode(event: any) {
+    console.log(' selecting node ');
+    this.getApplicationNames();
+  }
+
   search() {
     this.searchText = '';
     this.env = this.envFormControl.value.value;
     this.node = this.nodeFormControl.value;
+    console.log(this.orderFormControl);
     if ( !this.env || !this.node ) {
       this.snackBar.open('Please select Environment/Node', '', {
         duration: 2000,
@@ -93,7 +104,8 @@ export class LogComponent implements OnInit {
       return;
     }
     this.configService.showLoader(' Loading.. Please wait ');
-    this.configService.getFileNames(this.envFormControl.value.value, this.nodeFormControl.value, this.searchString||'').subscribe( data => {
+    this.configService.getFileNames(this.envFormControl.value.value, this.nodeFormControl.value, this.orderFormControl.value,
+      this.searchString || '' ).subscribe( data => {
       this.dummy = data['fileList'] || data;
       this.dummy.fileList = this.configService.sortData(this.dummy);
       this.result.fileList = this.dummy.fileList.slice(0, this.pageSize);
@@ -118,6 +130,18 @@ export class LogComponent implements OnInit {
       this.result.fileList  = this.dummy.fileList.slice(0, this.pageSize);
     }
 
+  }
+
+  getApplicationNames() {
+    this.loading = true;
+    this.configService.getApplicationNames(this.envFormControl.value.value, this.nodeFormControl.value).subscribe((res: any) => {
+      console.log(res);
+      this.config.filters.orderBy = res.fileList;
+      this.loading = false;
+    }, (error) => {
+      this.loading = false;
+      console.log('error');
+    })
   }
 
 }

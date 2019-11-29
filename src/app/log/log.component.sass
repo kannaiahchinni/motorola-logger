@@ -18,8 +18,36 @@ p
   a:hover
     color: blue
 
-.result-div
+.result-div1
   height: auto
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  margin: 3px
+  .item 
+    display: flex
+    flex-direction: column
+    height: auto
+    width: 125px
+    word-break: break-all
+    padding: .8em
+    margin: .4em .2em
+    background: #fff
+    cursor: pointer
+    border-radius: .28571429rem
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5
+    font-size: 12px
+    transition: transform .2s
+    &:hover
+      background: #efefef
+      transform: scale(1.2)
+    div
+      background: inherit
+      justify-content: center
+    div.header
+      text-align: center
+      
+
 
 .example-container
   position: fixed
