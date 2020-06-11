@@ -11,11 +11,14 @@
       { "label": "PROD", "value":"prod" ,"nodes":["node5", "node4"]}
     ],
     "nodes":[],
-    "orderBy":["Date", "Name"]
+    "orderBy":["msi-ecommmyview", "ecomm-orders", "dss-order", "msi-cpqquotetoorder"] 
   },
-  "baseUrl":"https://api-dev.motorolasolutions.com/ecom/v1.0/logs1/",
+  "baseUrl":"https://api-dev.motorolasolutions.com/ecom/v1.0/logstest/",
   "restApi":"readLogFileNames",
+  "applicationLogApi": "getSelectedApplications",
   "fileApi":"readLogFile",
-  "live":true
-
+  "live":true,
+  "applicationName": false,
+  "appliationApi": "getApplications",
+  "newGrid": true
 }

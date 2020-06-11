@@ -111,6 +111,10 @@ export class LogComponent implements OnInit {
       this.result.fileList = this.dummy.fileList.slice(0, this.pageSize);
       this.length = this.dummy.fileList.length;
       this.configService.removeLoader();
+    }, error => {
+
+      this.configService.removeLoader();
+      this.snackBar.open('Error occured.. Please try after some time', '', { duration: 5000});
     });
   }
 

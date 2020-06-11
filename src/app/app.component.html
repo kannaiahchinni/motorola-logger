@@ -1,17 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar class="shadow-class toolbar" *ngIf="config">
+<mat-toolbar class="shadow-class toolbar bg-teal-900" *ngIf="config">
 
   <button mat-button disabled>
     <img class="moto-icon"  [src]="config.logoImagePath">
   </button>
   <span class="spacer"></span>
   <mat-nav-list>
-    <!-- <a mat-list-item href="..." *ngFor="let link of links"> {{ link }} </a> -->
-    <!--<button mat-button color="primary" class="go-button" routerLink="/log" *ngIf="showLog" > {{ config.coverButtonName}} </button> -->
     <button mat-button color="accent" class="go-button" routerLink="/home" *ngIf="!showLog"> Home </button >
   </mat-nav-list>
-
-
 </mat-toolbar>
 
 <router-outlet></router-outlet>

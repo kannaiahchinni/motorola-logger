@@ -425,6 +425,8 @@ MIT
 
 @angular/material/paginator
 
+@angular/material/slide-toggle
+
 @angular/material/bottom-sheet
 
 @angular/material/dialog
